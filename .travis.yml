@@ -1,7 +1,6 @@
 sudo: false
 language: python
 python:
-  - "2.6"
   - "2.7"
   - "3.2"
   - "3.3"
@@ -15,6 +14,6 @@ matrix:
       dist: xenial
       sudo: true
 install:
-  - "pip install 'virtualenv<14.0.0' 'tox<3.2'"
+  - "pip install virtualenv tox"
   - "make README"
 script: tox -e py

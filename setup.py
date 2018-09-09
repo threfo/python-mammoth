@@ -12,9 +12,6 @@ _install_requires = [
     "cobble>=0.1.3,<0.2",
 ]
 
-if sys.version_info[:2] <= (2, 6):
-    _install_requires.append("argparse>=1.1,<2.0")
-
 setup(
     name='mammoth',
     version='1.4.6',
@@ -37,7 +34,6 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
