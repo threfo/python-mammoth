@@ -431,7 +431,15 @@ def _create_reader(numbering, content_types, relationships, styles, docx_file, f
         image_path = relationships.find_target_by_relationship_id(relationship_id)
         
         def open_image(**kwargs):
-            return files.open(image_path, kwargs)
+            forbid_url = False
+            if 'forbid_url' in kwargs:
+                forbid_url = kwargs['forbid_url']
+
+            url_timeout = 0
+            if 'url_timeout' in kwargs:
+                url_timeout = kwargs['url_timeout']
+
+            return files.open(image_path, forbid_url=forbid_url, timeout=url_timeout)
         
         return image_path, open_image
     

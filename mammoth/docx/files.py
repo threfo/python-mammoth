@@ -11,25 +11,20 @@ except ImportError:
 
 
 class Files(object):
-    forbid_arg  = 'forbid_url'
-    timeout_arg = 'url_timeout'
 
     def __init__(self, base):
         self._base = base
     
-    def open(self, uri, **kwargs):
+    def open(self, uri, forbid_url=False, timeout=0):
         """ open file handle which is either url or local file path
         """
         try:
             if _is_absolute(uri):
-                if not kwargs:  # by default
-                    return contextlib.closing(urlopen(uri))
 
-                if self.forbid_arg in kwargs and kwargs[self.forbid_arg] is True:
+                if forbid_url is True:
                     raise InvalidFileReferenceError("not allowed to retrieve external image '{0}'".format(uri))
-                elif self.timeout_arg in kwargs and type(kwargs[self.timeout_arg]) is int and kwargs[self.timeout_arg] > 0:
-                    url_timeout = kwargs[self.timeout_arg]
-                    return contextlib.closing(urlopen(uri, timeout=url_timeout))
+                elif timeout > 0:
+                    return contextlib.closing(urlopen(uri, timeout=timeout))
                 else:
                     return contextlib.closing(urlopen(uri))
             elif self._base is not None:
