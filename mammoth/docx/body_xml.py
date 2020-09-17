@@ -417,7 +417,7 @@ def _create_reader(numbering, content_types, relationships, styles, docx_file, f
         target = relationships.find_target_by_relationship_id(relationship_id)
         image_path = uri_to_zip_entry_name("word", target)
         
-        def open_image():
+        def open_image(**kwargs):
             image_file = docx_file.open(image_path)
             if hasattr(image_file, "__exit__"):
                 return image_file
@@ -430,8 +430,8 @@ def _create_reader(numbering, content_types, relationships, styles, docx_file, f
     def _find_linked_image(relationship_id):
         image_path = relationships.find_target_by_relationship_id(relationship_id)
         
-        def open_image():
-            return files.open(image_path)
+        def open_image(**kwargs):
+            return files.open(image_path, kwargs)
         
         return image_path, open_image
     
