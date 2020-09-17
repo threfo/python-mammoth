@@ -17,11 +17,11 @@ if sys.version_info[:2] <= (2, 6):
 
 setup(
     name='mammoth',
-    version='1.4.10',
+    version='1.4.11',
     description='Convert Word documents from docx to simple and clean HTML and Markdown',
     long_description=read("README.md"),
-    author='Michael Williamson',
-    author_email='mike@zwobble.org',
+    author='Michael Williamson; BelloAI',
+    author_email='mike@zwobble.org; chandler.sun@belloai.com, bruce.yu@belloai.com',
     url='http://github.com/mwilliamson/python-mammoth',
     packages=['mammoth', 'mammoth.docx', 'mammoth.html', 'mammoth.styles', 'mammoth.styles.parser', 'mammoth.writers'],
     entry_points={
