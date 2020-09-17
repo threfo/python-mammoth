@@ -11,13 +11,22 @@ except ImportError:
 
 
 class Files(object):
+
     def __init__(self, base):
         self._base = base
     
-    def open(self, uri):
+    def open(self, uri, forbid_url=False, timeout=0):
+        """ open file handle which is either url or local file path
+        """
         try:
             if _is_absolute(uri):
-                return contextlib.closing(urlopen(uri))
+
+                if forbid_url is True:
+                    raise NotAllowedAccessError("not allowed to retrieve external image '{0}'".format(uri))
+                elif timeout > 0:
+                    return contextlib.closing(urlopen(uri, timeout=timeout))
+                else:
+                    return contextlib.closing(urlopen(uri))
             elif self._base is not None:
                 return open(os.path.join(self._base, uri), "rb")
             else:
@@ -33,4 +42,7 @@ def _is_absolute(url):
 
 
 class InvalidFileReferenceError(ValueError):
+    pass
+
+class NotAllowedAccessError(ValueError):
     pass
