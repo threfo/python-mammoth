@@ -22,7 +22,7 @@ class Files(object):
             if _is_absolute(uri):
 
                 if forbid_url is True:
-                    raise InvalidFileReferenceError("not allowed to retrieve external image '{0}'".format(uri))
+                    raise NotAllowedAccessError("not allowed to retrieve external image '{0}'".format(uri))
                 elif timeout > 0:
                     return contextlib.closing(urlopen(uri, timeout=timeout))
                 else:
@@ -42,4 +42,7 @@ def _is_absolute(url):
 
 
 class InvalidFileReferenceError(ValueError):
+    pass
+
+class NotAllowedAccessError(ValueError):
     pass
