@@ -4,8 +4,8 @@ from . import html
 
 
 def img_element(func):
-    def convert_image(image, **kwargs):
-        attributes = func(image, kwargs).copy()
+    def convert_image(image):
+        attributes = func(image).copy()
         if image.alt_text:
             attributes["alt"] = image.alt_text
             
@@ -18,8 +18,8 @@ inline = img_element
 
 
 @img_element
-def data_uri(image, **kwargs):
-    with image.open(kwargs) as image_bytes:
+def data_uri(image):
+    with image.open() as image_bytes:
         encoded_src = base64.b64encode(image_bytes.read()).decode("ascii")
     
     return {
